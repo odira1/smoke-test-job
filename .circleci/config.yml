@@ -5,7 +5,12 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run: curl -s --head www.google333.com
+      - run:
+          command: |
+            apk update
+            apk upgrade
+            apk add curl
+            curl -s --head www.google333.com
       - run:
           name: "Smoke test Job"
           command: echo "things failed. check the url and try again!..."
