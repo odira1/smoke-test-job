@@ -2,24 +2,24 @@ version: 2.1
 
 jobs:
   smoke_test:
-    docker:
-      - image: alpine:latest
-    steps:
-      - run:
-          command: |
-            apk update
-            apk upgrade
-            apk add curl
-            curl -s --head www.google333.com
-      - run:
-          name: "Smoke test Job"
-          command: echo "things failed. check the url and try again!..."
-          when: on_fail
+      docker:
+        - image: alpine:latest
+      steps:
+        - run: apk add --update curl
+        - run:
+            name: smoke test.
+            command: |
+              URL="https://blog.udacity.com/"
+              if curl -s --head ${URL}
+              then
+               return 0
+              else
+               return 1
+              fi
 
 workflows:
-  smoke_tests:
+  my_workflow:
     jobs:
       - smoke_test:
-          filters:
-            branches:
-              only: master
+          requires:
+            - configure_infrastructure
