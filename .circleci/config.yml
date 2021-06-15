@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  smoke_test:
+    docker:
+      - image:
+    steps:
+      - run: curl -s --head www.google333.com
+      - run:
+          name: "Smoke test Job"
+          command: echo "things failed. check the url and try again!..."
+          when: on_fail
+
+workflows:
+  smoke_tests:
+    jobs:
+      - smoke_test:
+          filters:
+            branches:
+              only: master
