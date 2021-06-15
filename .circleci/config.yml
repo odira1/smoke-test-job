@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   smoke_test:
     docker:
-      - image:
+      - image: alpine:latest
     steps:
       - run: curl -s --head www.google333.com
       - run:
