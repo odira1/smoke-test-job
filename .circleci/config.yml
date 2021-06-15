@@ -10,7 +10,7 @@ jobs:
             apk update
             apk upgrade
             apk add curl
-            curl -s --head www.google333.com
+            curl -s --head www.google.com
       - run:
           name: "Smoke test Job"
           command: echo "things failed. check the url and try again!..."
